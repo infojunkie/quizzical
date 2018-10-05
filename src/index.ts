@@ -25,6 +25,7 @@ createConnection().then(async connection => {
             question.config = q.config;
             await connection.manager.save(question);
         });
-    })
-
-}).catch(error => console.log("Error: ", error));
+    });
+    console.log("Populated database.");
+    process.exit(0);
+}).catch(error => console.error("Error: ", error));

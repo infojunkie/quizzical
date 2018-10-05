@@ -3,6 +3,19 @@ quizzical
 
 A quiz-based, social learning engine like Duolingo.
 
+# Usage
+
+```
+$ npm i
+$ docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=quizzical mysql:5.7
+$ npm run start
+
+> quizzical@1.0.0 start /media/kratib/data/src/infojunkie/quizzical
+> tsc && node src/index.js
+
+Populated database.
+```
+
 # Use cases
 
 - Student starts a course
