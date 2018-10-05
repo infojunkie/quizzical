@@ -1,0 +1,72 @@
+{
+  "label": "Portuguese",
+  "skills": [
+    {
+      "label": "Basics 1",
+      "description": "In these basic lessons, you are going to see some words for people, such as man, woman, boy and girl, and also some basic verbs for eating, drinking, etc.",
+      "questions": [
+        {
+          "level": 1,
+          "difficulty": 1,
+          "type": "select",
+          "config": {
+            "target": "the woman",
+            "choices": ["a mulher", "o menino", "o homem"],
+            "correct": "a mulher"
+          }
+        },
+        {
+          "level": 1,
+          "difficulty": 1,
+          "type": "select",
+          "config": {
+            "target": "the girl",
+            "choices": ["a mulher", "a menina", "o menino"],
+            "answer": "a menina"
+          }
+        },
+        {
+          "level": 1,
+          "difficulty": 1,
+          "type": "assemble",
+          "config": {
+            "target": "a menina",
+            "choices": ["I", "boy", "the", "man", "The", "girl"],
+            "answer": "the girl"
+          }
+        },
+        {
+          "statement": "Select the word for “the man”",
+          "level": 1,
+          "difficulty": 1,
+          "type": "select",
+          "config": {
+            "target": "the man",
+            "choices": ["a mulher", "o menino", "o homem"],
+            "answer": "o homem"
+          }
+        },
+        {
+          "level": 1,
+          "difficulty": 2,
+          "type": "assemble",
+          "config": {
+            "target": "Eu sou uma menina",
+            "choices": ["girl", "the", "boy", "man", "I", "am", "woman", "a"],
+            "answer": "I am a girl"
+          }
+        },
+        {
+          "level": 1,
+          "difficulty": 2,
+          "type": "judge",
+          "config": {
+            "target": "I am the woman",
+            "choices": ["Sou a água", "Eu sou a mulher", "Eu sou a maçã"],
+            "answer": "Eu sou a mulher"
+          }
+        }
+      ]
+    }
+  ]
+}
