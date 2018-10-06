@@ -89,7 +89,6 @@ course: {
 }
 
 model: {
-
   // get the skill level of a student
   level: student, skill => int
 
