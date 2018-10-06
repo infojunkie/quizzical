@@ -24,4 +24,7 @@ export class Answer {
 
   @Column({ nullable: true })
   passed: boolean;
+
+  @Column({ type: "simple-json", nullable: true })
+  correct: any = null;
 }

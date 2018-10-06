@@ -12,7 +12,7 @@
           "config": {
             "target": "the woman",
             "choices": ["la mujer", "el niño", "el hombre"],
-            "correct": "la mujer"
+            "answer": "la mujer"
           }
         },
         {

@@ -11,7 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nlcst-normalize": "^2.1.2",
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.2",
     "typeorm": "^0.2.7"

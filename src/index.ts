@@ -77,8 +77,10 @@ createConnection().then(async connection => {
           answer.started = new Date(a.started);
           answer.submitted = new Date(a.submitted);
           answer.answer = a.answer;
+          // Object destructuring ftw
+          // https://www.reddit.com/r/javascript/comments/8m1kkk/is_object_destructuring_into_properties_of/dzk1uf7/
+          ({passed: answer.passed, correct: answer.correct} = answer.question.evaluate(answer.answer));
           await connection.manager.save(answer);
-          // TODO answer.passed
         });
       });
       // TODO enrollment.scores
