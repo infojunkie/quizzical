@@ -20,8 +20,6 @@ Populated students
 $ sqlite3 data/quizzical.db
 SQLite version 3.19.4 2017-08-18 19:28:12
 Enter ".help" for usage hints.
-sqlite> select * from badges;
-Error: no such table: badges
 sqlite> select * from badge;
 1|Wildfire||5-day streak,15-day streak,30-day streak
 2|Champion||Completed a course,Conquered a course,Mastered a course
