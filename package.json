@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node src/index.js",
-    "database": "docker run -d --rm --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=quizzical mysql:5.7"
+    "clean": "rm data/quizzical.db"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql": "^2.16.0",
     "reflect-metadata": "^0.1.12",
+    "sqlite3": "^4.0.2",
     "typeorm": "^0.2.7"
   },
   "devDependencies": {

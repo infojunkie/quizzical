@@ -13,7 +13,7 @@ export class Answer {
   @ManyToOne(type => Question)
   question: Question;
 
-  @Column({ type: "json", nullable: true })
+  @Column({ type: "simple-json", nullable: true })
   answer: any = null;
 
   @Column("datetime")

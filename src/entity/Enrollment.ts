@@ -20,7 +20,7 @@ export class Enrollment {
   @Column({ default: 0 })
   goal: number;
 
-  @Column("json")
+  @Column("simple-json")
   scores: any = {};
 
   @OneToMany(type => Quiz, quiz => quiz.enrollment)

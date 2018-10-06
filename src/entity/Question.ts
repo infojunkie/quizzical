@@ -16,7 +16,7 @@ export class Question {
   difficulty: number;
 
   // https://www.duolingo.com/design/
-  @Column("enum", { enum: [
+  @Column(/*"enum", { enum: [
       "assemble", // "Tap" on Duolingo
       "speak",
       "translate",
@@ -33,9 +33,9 @@ export class Question {
       "listen-answer",
       "use",
       "club-chat"
-  ] } )
+  ] }*/)
   type: string;
 
-  @Column("json")
+  @Column("simple-json")
   config: any;
 }
