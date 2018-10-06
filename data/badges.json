@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Wildfire",
+    "levels": ["5-day streak", "15-day streak", "30-day streak"]
+  },
+  {
+    "label": "Champion",
+    "levels": ["Completed a course", "Conquered a course", "Mastered a course"]
+  },
+  {
+    "label": "Sharpshooter",
+    "levels": [
+      "Completed 1 lessons without getting anything wrong",
+      "Completed 4 lessons without getting anything wrong",
+      "Completed 10 lessons without getting anything wrong"
+    ]
+  }
+]

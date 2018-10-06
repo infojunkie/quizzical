@@ -3,17 +3,27 @@ quizzical
 
 A quiz-based, social learning engine like Duolingo.
 
+https://forum.duolingo.com/comment/7285662/Let-s-open-Duolingo-s-source-code
+
 # Usage
 
 ```
 $ npm i
-$ docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=quizzical mysql:5.7
-$ npm run start
+$ npm run database
+
+> quizzical@1.0.0 database /media/kratib/data/src/infojunkie/quizzical
+> docker run -d --rm --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=quizzical mysql:5.7
+
+407dc2c3dcd19e04f222bd33bdda594784071768efbf8c0885941fe666b0eb42
+$ npm start
 
 > quizzical@1.0.0 start /media/kratib/data/src/infojunkie/quizzical
 > tsc && node src/index.js
 
-Populated database.
+Populated badges
+Populated courses
+Populated students
+$ docker stop mysql
 ```
 
 # Use cases
@@ -80,14 +90,14 @@ quiz: {
     question: ref(question)
     answer: json // answer structure depends on the type of question
     started: timestamp // time at which the question was started by the student
-    answered: timestamp // time at whice the answer was submitted by the student
+    submitted: timestamp // time at whice the answer was submitted by the student
     passed: boolean
   }]
 }
 
 student: {
   name: text
-  courses: [{
+  enrollments: [{
     course: ref(course)
     enrolled: timestamp
     goal: int // current daily goal
@@ -95,17 +105,17 @@ student: {
       tally: enum(total, daily, weekly)
       points: int
     }]
-    skills: [{ // current skill levels
-      skill: ref(skill)
-      level: int
-    }]
-    history: [quiz]
+    quizzes: [quiz]
   }]
-  badges: [ref(badge)] // earned badges
+  achievements: [{
+    badge: ref(badge),
+    level: int,
+  }]
 }
 
 badge: {
   label: text
-  earned: student => boolean // check whether the given student has earned the badge
+  levels: [text]
+  earned: student => int // check whether the given student has earned the badge and at which level
 }
 ```

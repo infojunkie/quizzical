@@ -3,15 +3,13 @@ import {Skill} from './Skill';
 
 @Entity()
 export class Course {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  label: string;
 
-    @Column()
-    label: string;
-
-    @OneToMany(type => Skill, skill => skill.course)
-    @JoinTable()
-    skills: Skill[];
-
+  @OneToMany(type => Skill, skill => skill.course)
+  @JoinTable()
+  skills: Skill[];
 }
