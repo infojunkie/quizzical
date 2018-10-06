@@ -8,7 +8,7 @@
         {
           "level": 1,
           "difficulty": 1,
-          "type": "select",
+          "type": "SelectQuestion",
           "config": {
             "target": "the woman",
             "choices": ["a mulher", "o menino", "o homem"],
@@ -18,7 +18,7 @@
         {
           "level": 1,
           "difficulty": 1,
-          "type": "select",
+          "type": "SelectQuestion",
           "config": {
             "target": "the girl",
             "choices": ["a mulher", "a menina", "o menino"],
@@ -28,7 +28,7 @@
         {
           "level": 1,
           "difficulty": 1,
-          "type": "assemble",
+          "type": "AssembleQuestion",
           "config": {
             "target": "a menina",
             "choices": ["I", "boy", "the", "man", "The", "girl"],
@@ -39,7 +39,7 @@
           "statement": "Select the word for “the man”",
           "level": 1,
           "difficulty": 1,
-          "type": "select",
+          "type": "SelectQuestion",
           "config": {
             "target": "the man",
             "choices": ["a mulher", "o menino", "o homem"],
@@ -49,7 +49,7 @@
         {
           "level": 1,
           "difficulty": 2,
-          "type": "assemble",
+          "type": "AssembleQuestion",
           "config": {
             "target": "Eu sou uma menina",
             "choices": ["girl", "the", "boy", "man", "I", "am", "woman", "a"],
@@ -59,7 +59,7 @@
         {
           "level": 1,
           "difficulty": 2,
-          "type": "judge",
+          "type": "JudgeQuestion",
           "config": {
             "target": "I am the woman",
             "choices": ["Sou a água", "Eu sou a mulher", "Eu sou a maçã"],

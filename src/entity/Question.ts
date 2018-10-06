@@ -1,7 +1,17 @@
-import {Column, Entity, JoinTable, OneToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  TableInheritance
+} from 'typeorm';
+import normalize from 'nlcst-normalize';
 import {Skill} from './Skill';
 
 @Entity()
+@TableInheritance({ column: { type: "varchar", name: "type" } })
 export class Question {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,27 +25,15 @@ export class Question {
   @Column()
   difficulty: number;
 
-  // https://www.duolingo.com/design/
-  @Column(/*"enum", { enum: [
-      "assemble", // "Tap" on Duolingo
-      "speak",
-      "translate",
-      "fill",
-      "match",
-      "select",
-      "assist",
-      "name",
-      "listen",
-      "judge",
-      "word-smash", // Duolingo clubs
-      "caption",
-      "scenario",
-      "listen-answer",
-      "use",
-      "club-chat"
-  ] }*/)
-  type: string;
-
   @Column("simple-json")
   config: any;
+
+  // Most question types store the correct answer in `config.answer`
+  evaluate(answer: any) {
+    return Question.normalizeText(this.config.answer) === Question.normalizeText(answer);
+  }
+
+  protected static normalizeText(text: string) {
+    return normalize(text);
+  }
 }

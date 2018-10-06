@@ -8,7 +8,7 @@
         {
           "level": 1,
           "difficulty": 1,
-          "type": "select",
+          "type": "SelectQuestion",
           "config": {
             "target": "the woman",
             "choices": ["la mujer", "el niño", "el hombre"],
@@ -18,7 +18,7 @@
         {
           "level": 1,
           "difficulty": 1,
-          "type": "select",
+          "type": "SelectQuestion",
           "config": {
             "target": "the girl",
             "choices": ["la mujer", "la niña", "el niño"],
@@ -28,7 +28,7 @@
         {
           "level": 1,
           "difficulty": 1,
-          "type": "assemble",
+          "type": "AssembleQuestion",
           "config": {
             "target": "la niña",
             "choices": ["I", "boy", "the", "man", "The", "girl"],
@@ -39,7 +39,7 @@
           "statement": "Select the word for “the man”",
           "level": 1,
           "difficulty": 1,
-          "type": "select",
+          "type": "SelectQuestion",
           "config": {
             "target": "the man",
             "choices": ["la mujer", "el niño", "el hombre"],
@@ -49,7 +49,7 @@
         {
           "level": 1,
           "difficulty": 2,
-          "type": "assemble",
+          "type": "AssembleQuestion",
           "config": {
             "target": "Yo soy una niña",
             "choices": ["girl", "the", "boy", "man", "I", "am", "woman", "a"],
@@ -59,7 +59,7 @@
         {
           "level": 1,
           "difficulty": 2,
-          "type": "judge",
+          "type": "JudgeQuestion",
           "config": {
             "target": "I am the woman",
             "choices": ["Soy el agua", "Yo soy la mujer", "Yo soy la manzana"],

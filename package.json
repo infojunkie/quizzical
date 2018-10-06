@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node src/index.js",
-    "clean": "rm data/quizzical.db"
+    "clean": "rm data/quizzical.db || true",
+    "database": "sqlite3 data/quizzical.db || true"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nlcst-normalize": "^2.1.2",
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.2",
     "typeorm": "^0.2.7"

@@ -40,11 +40,10 @@ createConnection().then(async connection => {
       skill.description = s.description;
       await connection.manager.save(skill);
       await asyncForEach(s.questions, async q => {
-        const question = new Question();
+        const question = connection.getMetadata(q.type).create();
         question.skill = skill;
         question.level = q.level;
         question.difficulty = q.difficulty;
-        question.type = q.type;
         question.config = q.config;
         await connection.manager.save(question);
       });
