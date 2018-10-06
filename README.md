@@ -17,29 +17,31 @@ $ npm start
 Populated badges
 Populated courses
 Populated students
-$ sqlite3 data/quizzical.db
+$ npm run database
+
+> quizzical@1.0.0 database /media/kratib/data/src/infojunkie/quizzical
+> sqlite3 data/quizzical.db || true
+
 SQLite version 3.19.4 2017-08-18 19:28:12
 Enter ".help" for usage hints.
 sqlite> select * from badge;
 1|Wildfire||5-day streak,15-day streak,30-day streak
 2|Champion||Completed a course,Conquered a course,Mastered a course
 3|Sharpshooter||Completed 1 lessons without getting anything wrong,Completed 4 lessons without getting anything wrong,Completed 10 lessons without getting anything wrong
-sqlite> select * from student;
-1|Karim
 sqlite> select * from question;
-1|1|1|select|{"target":"the woman","choices":["a mulher","o menino","o homem"],"correct":"a mulher"}|1
-2|1|1|select|{"target":"the girl","choices":["a mulher","a menina","o menino"],"answer":"a menina"}|1
-3|1|1|assemble|{"target":"a menina","choices":["I","boy","the","man","The","girl"],"answer":"the girl"}|1
-4|1|1|select|{"target":"the man","choices":["a mulher","o menino","o homem"],"answer":"o homem"}|1
-5|1|2|assemble|{"target":"Eu sou uma menina","choices":["girl","the","boy","man","I","am","woman","a"],"answer":"I am a girl"}|1
-6|1|2|judge|{"target":"I am the woman","choices":["Sou a água","Eu sou a mulher","Eu sou a maçã"],"answer":"Eu sou a mulher"}|1
-7|1|1|select|{"target":"the woman","choices":["la mujer","el niño","el hombre"],"correct":"la mujer"}|2
-8|1|1|select|{"target":"the girl","choices":["la mujer","la niña","el niño"],"answer":"la niña"}|2
-9|1|1|assemble|{"target":"la niña","choices":["I","boy","the","man","The","girl"],"answer":"the girl"}|2
-10|1|1|select|{"target":"the man","choices":["la mujer","el niño","el hombre"],"answer":"el hombre"}|2
-11|1|2|assemble|{"target":"Yo soy una niña","choices":["girl","the","boy","man","I","am","woman","a"],"answer":"I am a girl"}|2
-12|1|2|judge|{"target":"I am the woman","choices":["Soy el agua","Yo soy la mujer","Yo soy la manzana"],"answer":"Yo soy la mujer"}|2
-^D
+1|1|1|{"target":"the woman","choices":["a mulher","o menino","o homem"],"correct":"a mulher"}|SelectQuestion|1
+2|1|1|{"target":"the girl","choices":["a mulher","a menina","o menino"],"answer":"a menina"}|SelectQuestion|1
+3|1|1|{"target":"a menina","choices":["I","boy","the","man","The","girl"],"answer":"the girl"}|AssembleQuestion|1
+4|1|1|{"target":"the man","choices":["a mulher","o menino","o homem"],"answer":"o homem"}|SelectQuestion|1
+5|1|2|{"target":"Eu sou uma menina","choices":["girl","the","boy","man","I","am","woman","a"],"answer":"I am a girl"}|AssembleQuestion|1
+6|1|2|{"target":"I am the woman","choices":["Sou a água","Eu sou a mulher","Eu sou a maçã"],"answer":"Eu sou a mulher"}|JudgeQuestion|1
+7|1|1|{"target":"the woman","choices":["la mujer","el niño","el hombre"],"correct":"la mujer"}|SelectQuestion|2
+8|1|1|{"target":"the girl","choices":["la mujer","la niña","el niño"],"answer":"la niña"}|SelectQuestion|2
+9|1|1|{"target":"la niña","choices":["I","boy","the","man","The","girl"],"answer":"the girl"}|AssembleQuestion|2
+10|1|1|{"target":"the man","choices":["la mujer","el niño","el hombre"],"answer":"el hombre"}|SelectQuestion|2
+11|1|2|{"target":"Yo soy una niña","choices":["girl","the","boy","man","I","am","woman","a"],"answer":"I am a girl"}|AssembleQuestion|2
+12|1|2|{"target":"I am the woman","choices":["Soy el agua","Yo soy la mujer","Yo soy la manzana"],"answer":"Yo soy la mujer"}|JudgeQuestion|2
+sqlite> ^D
 $ npm run clean
 
 > quizzical@1.0.0 clean /media/kratib/data/src/infojunkie/quizzical
