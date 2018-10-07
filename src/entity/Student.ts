@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   OneToMany,
+  ManyToMany,
+  JoinTable,
   PrimaryGeneratedColumn,
   getConnection
 } from 'typeorm';
@@ -23,6 +25,24 @@ export class Student {
 
   @OneToMany(type => Enrollment, enrollment => enrollment.student)
   enrollments: Enrollment[];
+
+  @ManyToMany(type => Student, student => student.following)
+  followers: Student[];
+
+  @ManyToMany(type => Student, student => student.followers, {
+    cascade: true
+  })
+  @JoinTable({
+    joinColumn: {
+      name: "studentId",
+      referencedColumnName: "id"
+    },
+    inverseJoinColumn: {
+      name: "studentFollowingId",
+      referencedColumnName: "id"
+    }
+  })
+  following: Student[];
 
   @OneToMany(type => DailyScore, dailyScore => dailyScore.student)
   scores: DailyScore[];

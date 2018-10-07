@@ -1,6 +1,7 @@
 {
   "name": "Karim",
   "goal": 3,
+  "following": ["Caio"],
   "enrollments": [
     {
       "course": "Spanish",

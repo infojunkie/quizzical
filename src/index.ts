@@ -67,6 +67,10 @@ createConnection().then(async connection => {
     const student = new Student();
     student.name = s.name;
     student.goal = s.goal;
+    student.following = [];
+    await asyncForEach(s.following, async f => {
+      student.following.push(await connection.manager.findOne(Student, { name: f }));
+    });
     await connection.manager.save(student);
     const dailyScores = new Map<string, DailyScore>();
     await asyncForEach(s.enrollments, async e => {

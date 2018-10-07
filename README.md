@@ -109,6 +109,7 @@ course: {
 student: {
   name: text
   goal: int // current daily goal measured in points
+  following: [ref(student)]
   enrollments: [{
     course: ref(course)
     enrolled: datetime
