@@ -130,8 +130,9 @@ student: {
     }]
   }]
   scores: [{
-    day: date
+    date: date
     score: int
+    goal: int // student goal on that day
   }]
   achievements: [{
     badge: ref(badge)
