@@ -1,7 +1,7 @@
 quizzical
 ---------
 
-A quiz-based, social learning engine like Duolingo.
+A quiz-based learning engine like Duolingo or Quizlet.
 
 https://forum.duolingo.com/comment/7285662/Let-s-open-Duolingo-s-source-code
 
@@ -106,30 +106,28 @@ course: {
   }]
 }
 
-quiz: {
-  student: ref(student)
-  skill: ref(skill)
-  level: int
-  answers: [{
-    question: ref(question)
-    answer: json // answer structure depends on the type of question
-    started: timestamp // time at which the question was started by the student
-    submitted: timestamp // time at whice the answer was submitted by the student
-    passed: boolean
-    correct: json
-  }]
-
-  // get the score of a student for their quiz answers
-  score: student => int
-}
-
 student: {
   name: text
   goal: int // current daily goal measured in points
   enrollments: [{
     course: ref(course)
-    enrolled: timestamp
-    quizzes: [quiz]
+    enrolled: datetime
+    quizzes: [{
+      skill: ref(skill)
+      level: int
+      started: datetime
+      completed: datetime
+      answers: [{
+        question: ref(question)
+        answer: json // answer structure depends on the type of question
+        started: datetime // time at which the question was started by the student
+        completed: datetime // time at whice the answer was submitted by the student
+        passed: boolean
+        correct: json
+      }]
+
+      score: () => int
+    }]
   }]
   scores: [{
     day: date

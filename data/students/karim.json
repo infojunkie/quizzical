@@ -14,25 +14,25 @@
               "question": 0,
               "answer": "la mujer",
               "started": "2018-10-04 18:01:23",
-              "submitted": "2018-10-04 18:01:34"
+              "completed": "2018-10-04 18:01:34"
             },
             {
               "question": 1,
               "answer": "la niña",
               "started": "2018-10-04 18:01:45",
-              "submitted": "2018-10-04 18:01:56"
+              "completed": "2018-10-04 18:01:56"
             },
             {
               "question": 2,
               "answer": "the boy",
               "started": "2018-10-04 18:02:23",
-              "submitted": "2018-10-04 18:02:34"
+              "completed": "2018-10-04 18:02:34"
             },
             {
               "question": 2,
               "answer": "the girl",
               "started": "2018-10-04 18:02:45",
-              "submitted": "2018-10-04 18:02:56"
+              "completed": "2018-10-04 18:02:56"
             }
           ]
         }
@@ -50,25 +50,25 @@
               "question": 0,
               "answer": "a mulher",
               "started": "2016-01-05 17:01:23",
-              "submitted": "2016-01-05 17:01:34"
+              "completed": "2016-01-05 17:01:34"
             },
             {
               "question": 1,
               "answer": "o menino",
               "started": "2016-01-05 17:01:45",
-              "submitted": "2016-01-05 17:01:56"
+              "completed": "2016-01-05 17:01:56"
             },
             {
               "question": 2,
               "answer": "the girl",
               "started": "2016-01-05 17:02:23",
-              "submitted": "2016-01-05 17:02:34"
+              "completed": "2016-01-05 17:02:34"
             },
             {
               "question": 1,
               "answer": "a menina",
               "started": "2016-01-05 17:02:45",
-              "submitted": "2016-01-05 17:02:56"
+              "completed": "2016-01-05 17:02:56"
             }
           ]
         },
@@ -80,19 +80,19 @@
               "question": 3,
               "answer": "o homem",
               "started": "2016-01-06 14:01:45",
-              "submitted": "2016-01-06 14:01:56"
+              "completed": "2016-01-06 14:01:56"
             },
             {
               "question": 4,
               "answer": "I am a girl",
               "started": "2016-01-06 14:02:23",
-              "submitted": "2016-01-06 14:02:34"
+              "completed": "2016-01-06 14:02:34"
             },
             {
               "question": 5,
               "answer": "Eu sou a mulher",
               "started": "2016-01-06 14:02:45",
-              "submitted": "2016-01-06 14:02:56"
+              "completed": "2016-01-06 14:02:56"
             }
           ]
         }

@@ -80,32 +80,28 @@ createConnection().then(async connection => {
         quiz.enrollment = enrollment;
         quiz.level = q.level;
         quiz.skill = await connection.manager.findOne(Skill, { label: q.skill, course: enrollment.course });
+        quiz.started = new Date(q.answers[0].started); // assuming answers are chronological in json
+        quiz.completed = new Date(q.answers[q.answers.length-1].completed);
         await connection.manager.save(quiz);
-        quiz.answers = new Array<Answer>();
         const questions = await connection.manager.find(Question, { skill: quiz.skill, level: quiz.level });
         await asyncForEach(q.answers, async a => {
           const answer = new Answer();
           answer.quiz = quiz;
           answer.question = questions[a.question];
           answer.started = new Date(a.started);
-          answer.submitted = new Date(a.submitted);
+          answer.completed = new Date(a.completed);
           answer.answer = a.answer;
           // Object destructuring ftw
           // https://www.reddit.com/r/javascript/comments/8m1kkk/is_object_destructuring_into_properties_of/dzk1uf7/
           ({passed: answer.passed, correct: answer.correct} = answer.question.evaluate(answer.answer));
           await connection.manager.save(answer);
-          quiz.answers.push(answer);
         });
 
         // Update daily score with this quiz.
-        // Date of score is the latest answer submission date.
-        const date = quiz.answers.reduce( (d, answer) => {
-          return d.getTime() > answer.submitted.getTime() ? d : answer.submitted;
-        }, new Date(1971, 11, 26));
-        const dateString = DateUtils.mixedDateToDateString(date);
+        const dateString = DateUtils.mixedDateToDateString(quiz.completed);
         const dailyScore = dailyScores.get(dateString) || new DailyScore();
         dailyScore.student = student;
-        dailyScore.date = date;
+        dailyScore.date = quiz.completed;
         dailyScore.goal = student.goal;
         dailyScore.score += await quiz.score();
         dailyScores.set(dateString, dailyScore);

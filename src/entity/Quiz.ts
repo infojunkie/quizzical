@@ -24,6 +24,12 @@ export class Quiz {
   @Column()
   level: number;
 
+  @Column("datetime")
+  started: Date;
+
+  @Column("datetime")
+  completed: Date;
+
   @OneToMany(type => Answer, answer => answer.quiz)
   answers: Answer[];
 

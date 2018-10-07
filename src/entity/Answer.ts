@@ -20,7 +20,7 @@ export class Answer {
   started: Date;
 
   @Column("datetime")
-  submitted: Date;
+  completed: Date;
 
   @Column({ nullable: true })
   passed: boolean;
