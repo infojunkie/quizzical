@@ -1,8 +1,6 @@
 import {
   Column,
   Entity,
-  JoinTable,
-  OneToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   TableInheritance

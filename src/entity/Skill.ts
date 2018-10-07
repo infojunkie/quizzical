@@ -13,8 +13,19 @@ export class Skill {
   @ManyToMany(type => Skill, skill => skill.prerequisites)
   dependents: Skill[];
 
-  @ManyToMany(type => Skill, skill => skill.dependents)
-  @JoinTable()
+  @ManyToMany(type => Skill, skill => skill.dependents, {
+    cascade: true
+  })
+  @JoinTable({
+    joinColumn: {
+      name: "skillId",
+      referencedColumnName: "id"
+    },
+    inverseJoinColumn: {
+      name: "skillPrerequisiteId",
+      referencedColumnName: "id"
+    }
+  })
   prerequisites: Skill[];
 
   @Column()
@@ -24,6 +35,5 @@ export class Skill {
   description: string;
 
   @OneToMany(type => Question, question => question.skill)
-  @JoinTable()
   questions: Question[];
 }

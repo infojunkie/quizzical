@@ -14,6 +14,7 @@ import * as fs from 'fs';
 
 // https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
 async function asyncForEach(array, callback) {
+  if (!array) return;
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
@@ -43,6 +44,10 @@ createConnection().then(async connection => {
       skill.course = course;
       skill.label = s.label;
       skill.description = s.description;
+      skill.prerequisites = [];
+      await asyncForEach(s.prerequisites, async p => {
+        skill.prerequisites.push(await connection.manager.findOne(Skill, { label: p, course }));
+      });
       await connection.manager.save(skill);
       await asyncForEach(s.questions, async q => {
         const question = connection.getMetadata(q.type).create();

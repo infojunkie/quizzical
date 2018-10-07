@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  JoinTable,
   OneToMany,
   PrimaryGeneratedColumn,
   getConnection
@@ -23,15 +22,12 @@ export class Student {
   goal: number;
 
   @OneToMany(type => Enrollment, enrollment => enrollment.student)
-  @JoinTable()
   enrollments: Enrollment[];
 
   @OneToMany(type => DailyScore, dailyScore => dailyScore.student)
-  @JoinTable()
   scores: DailyScore[];
 
   @OneToMany(type => Achievement, achievement => achievement.student)
-  @JoinTable()
   achievements: Achievement[];
 
   // Number of consecutive days of achieving daily goal

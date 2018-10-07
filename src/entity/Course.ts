@@ -1,4 +1,4 @@
-import {Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Skill} from './Skill';
 
 @Entity()
@@ -10,6 +10,5 @@ export class Course {
   label: string;
 
   @OneToMany(type => Skill, skill => skill.course)
-  @JoinTable()
   skills: Skill[];
 }
