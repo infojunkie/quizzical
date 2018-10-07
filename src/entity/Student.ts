@@ -39,7 +39,7 @@ export class Student {
   async streak(start: Date): Promise<number> {
     let streak = 0;
     do {
-      const date = start;
+      const date = new Date(start);
       date.setDate(date.getDate() - streak);
       const dailyScore = await getConnection().manager.findOne(DailyScore, {
         date: DateUtils.mixedDateToDateString(date),

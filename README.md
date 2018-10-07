@@ -16,7 +16,8 @@ $ npm start
 
 Populated badges
 Populated courses
-Populated students
+Populated students with daily scores and achievements
+
 $ npm run database
 
 > quizzical@1.0.0 database /media/kratib/data/src/infojunkie/quizzical
@@ -52,7 +53,14 @@ sqlite> select * from answer;
 8|"o homem"|2016-01-06 22:01:45.000|2016-01-06 22:01:56.000|1|"o homem"|3|4
 9|"I am a girl"|2016-01-06 22:02:23.000|2016-01-06 22:02:34.000|1|"I am a girl"|3|5
 10|"Eu sou a mulher"|2016-01-06 22:02:45.000|2016-01-06 22:02:56.000|1|"Eu sou a mulher"|3|6
+sqlite> select * from daily_score;
+1|2018-10-04|4|3|1
+2|2016-01-05|4|3|1
+3|2016-01-06|3|3|1
+sqlite> select * from achievement;
+1|1|2016-01-06|1|1
 sqlite> ^D
+
 $ npm run clean
 
 > quizzical@1.0.0 clean /media/kratib/data/src/infojunkie/quizzical

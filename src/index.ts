@@ -1,4 +1,5 @@
 import {createConnection} from "typeorm";
+import {DateUtils} from 'typeorm/util/DateUtils';
 import {Course} from "./entity/Course";
 import {Skill} from "./entity/Skill";
 import {Question} from "./entity/Question";
@@ -62,7 +63,7 @@ createConnection().then(async connection => {
     student.name = s.name;
     student.goal = s.goal;
     await connection.manager.save(student);
-    const scores = new Map<string, DailyScore>();
+    const dailyScores = new Map<string, DailyScore>();
     await asyncForEach(s.enrollments, async e => {
       const enrollment = new Enrollment();
       enrollment.student = student;
@@ -92,21 +93,22 @@ createConnection().then(async connection => {
         });
 
         // Update daily score with this quiz.
-        const date = quiz.answers.reduce( (date, answer) => {
-          return date.getTime() > answer.submitted.getTime() ? date : answer.submitted;
+        // Date of score is the latest answer submission date.
+        const date = quiz.answers.reduce( (d, answer) => {
+          return d.getTime() > answer.submitted.getTime() ? d : answer.submitted;
         }, new Date(1971, 11, 26));
-        const dateString = date.toDateString();
-        const dailyScore = scores.get(dateString) || new DailyScore();
+        const dateString = DateUtils.mixedDateToDateString(date);
+        const dailyScore = dailyScores.get(dateString) || new DailyScore();
         dailyScore.student = student;
-        dailyScore.date = new Date(dateString);
+        dailyScore.date = date;
         dailyScore.goal = student.goal;
         dailyScore.score += await quiz.score();
-        scores.set(dateString, dailyScore);
+        dailyScores.set(dateString, dailyScore);
       });
     });
 
     // Student scores.
-    await asyncForEach([...scores.values()], async dailyScore => {
+    await asyncForEach([...dailyScores.values()], async dailyScore => {
       await connection.manager.save(dailyScore);
 
       // Student badges - check each day.
