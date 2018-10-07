@@ -7,6 +7,8 @@ import {Student} from "./entity/Student";
 import {Enrollment} from "./entity/Enrollment";
 import {Quiz} from "./entity/Quiz";
 import {Answer} from "./entity/Answer";
+import {Achievement} from "./entity/Achievement";
+import {DailyScore} from "./entity/DailyScore";
 import * as fs from 'fs';
 
 // https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
@@ -19,10 +21,12 @@ async function asyncForEach(array, callback) {
 // connection settings are in the "ormconfig.json" file
 createConnection().then(async connection => {
   // Badges
+  const badges = new Array<Badge>();
   await asyncForEach(JSON.parse(fs.readFileSync('data/badges.json').toString()), async b => {
-    const badge = new Badge();
+    const badge = connection.getMetadata(b.type).create();
     badge.label = b.label;
     badge.levels = b.levels;
+    badges.push(badge);
     await connection.manager.save(badge);
   });
   console.log('Populated badges');
@@ -56,7 +60,9 @@ createConnection().then(async connection => {
     const s = JSON.parse(fs.readFileSync(`data/students/${sf}`).toString());
     const student = new Student();
     student.name = s.name;
+    student.goal = s.goal;
     await connection.manager.save(student);
+    const scores = new Map<string, DailyScore>();
     await asyncForEach(s.enrollments, async e => {
       const enrollment = new Enrollment();
       enrollment.student = student;
@@ -69,6 +75,7 @@ createConnection().then(async connection => {
         quiz.level = q.level;
         quiz.skill = await connection.manager.findOne(Skill, { label: q.skill, course: enrollment.course });
         await connection.manager.save(quiz);
+        quiz.answers = new Array<Answer>();
         const questions = await connection.manager.find(Question, { skill: quiz.skill, level: quiz.level });
         await asyncForEach(q.answers, async a => {
           const answer = new Answer();
@@ -81,13 +88,42 @@ createConnection().then(async connection => {
           // https://www.reddit.com/r/javascript/comments/8m1kkk/is_object_destructuring_into_properties_of/dzk1uf7/
           ({passed: answer.passed, correct: answer.correct} = answer.question.evaluate(answer.answer));
           await connection.manager.save(answer);
+          quiz.answers.push(answer);
         });
+
+        // Update daily score with this quiz.
+        const date = quiz.answers.reduce( (date, answer) => {
+          return date.getTime() > answer.submitted.getTime() ? date : answer.submitted;
+        }, new Date(1971, 11, 26));
+        const dateString = date.toDateString();
+        const dailyScore = scores.get(dateString) || new DailyScore();
+        dailyScore.student = student;
+        dailyScore.date = new Date(dateString);
+        dailyScore.goal = student.goal;
+        dailyScore.score += await quiz.score();
+        scores.set(dateString, dailyScore);
       });
-      // TODO enrollment.scores
     });
-    // TODO student.achievements
+
+    // Student scores.
+    await asyncForEach([...scores.values()], async dailyScore => {
+      await connection.manager.save(dailyScore);
+
+      // Student badges - check each day.
+      await asyncForEach(badges, async badge => {
+        const level = await badge.earned(student, dailyScore.date);
+        if (level > 0) {
+          const achievement = new Achievement();
+          achievement.student = student;
+          achievement.badge = badge;
+          achievement.level = level;
+          achievement.obtained = dailyScore.date;
+          await connection.manager.save(achievement);
+        }
+      });
+    });
   });
-  console.log('Populated students');
+  console.log('Populated students with daily scores and achievements');
 
   process.exit(0);
 }).catch(error => console.error("Error: ", error));

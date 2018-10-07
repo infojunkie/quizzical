@@ -1,13 +1,16 @@
 [
   {
+    "type": "WildfireBadge",
     "label": "Wildfire",
     "levels": ["5-day streak", "15-day streak", "30-day streak"]
   },
   {
+    "type": "ChampionBadge",
     "label": "Champion",
     "levels": ["Completed a course", "Conquered a course", "Mastered a course"]
   },
   {
+    "type": "SharpshooterBadge",
     "label": "Sharpshooter",
     "levels": [
       "Completed 1 lessons without getting anything wrong",

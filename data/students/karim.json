@@ -1,5 +1,6 @@
 {
   "name": "Karim",
+  "goal": 3,
   "enrollments": [
     {
       "course": "Spanish",
@@ -26,6 +27,12 @@
               "answer": "the boy",
               "started": "2018-10-04 18:02:23",
               "submitted": "2018-10-04 18:02:34"
+            },
+            {
+              "question": 2,
+              "answer": "the girl",
+              "started": "2018-10-04 18:02:45",
+              "submitted": "2018-10-04 18:02:56"
             }
           ]
         }
@@ -56,6 +63,12 @@
               "answer": "the girl",
               "started": "2016-01-05 17:02:23",
               "submitted": "2016-01-05 17:02:34"
+            },
+            {
+              "question": 1,
+              "answer": "a menina",
+              "started": "2016-01-05 17:02:45",
+              "submitted": "2016-01-05 17:02:56"
             }
           ]
         },
@@ -63,12 +76,6 @@
           "skill": "Basics 1",
           "level": 1,
           "answers": [
-            {
-              "question": 1,
-              "answer": "a menina",
-              "started": "2016-01-06 14:01:23",
-              "submitted": "2016-01-06 14:01:34"
-            },
             {
               "question": 3,
               "answer": "o homem",

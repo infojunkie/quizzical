@@ -1,4 +1,12 @@
-import {Column, Entity, JoinTable, OneToMany, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  getConnection
+} from 'typeorm';
 import {Skill} from './Skill';
 import {Enrollment} from './Enrollment';
 import {Answer} from './Answer';
@@ -19,4 +27,9 @@ export class Quiz {
 
   @OneToMany(type => Answer, answer => answer.quiz)
   answers: Answer[];
+
+  async score(): Promise<number> {
+    // TODO add logic to reward first-time correct answers.
+    return (await getConnection().manager.findAndCount(Answer, { quiz: this }))[1];
+  }
 }

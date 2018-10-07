@@ -15,4 +15,7 @@ export class Achievement {
 
   @Column()
   level: number;
+
+  @Column("date")
+  obtained: Date;
 }

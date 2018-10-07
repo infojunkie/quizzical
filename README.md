@@ -98,20 +98,6 @@ course: {
   }]
 }
 
-model: {
-  // get the skill level of a student
-  level: student, skill => int
-
-  // generate a new quiz for a given student for a given skill
-  quiz: student, skill => quiz
-
-  // get the score of a student for their quiz answers
-  score: student, quiz => score: int
-
-  // get the streak of a student in a given course
-  streak: student, course => streak: int
-}
-
 quiz: {
   student: ref(student)
   skill: ref(skill)
@@ -124,29 +110,38 @@ quiz: {
     passed: boolean
     correct: json
   }]
+
+  // get the score of a student for their quiz answers
+  score: student => int
 }
 
 student: {
   name: text
+  goal: int // current daily goal measured in points
   enrollments: [{
     course: ref(course)
     enrolled: timestamp
-    goal: int // current daily goal
-    scores: [{ // current scores
-      tally: enum(total, daily, weekly)
-      points: int
-    }]
     quizzes: [quiz]
   }]
-  achievements: [{
-    badge: ref(badge),
-    level: int,
+  scores: [{
+    day: date
+    score: int
   }]
+  achievements: [{
+    badge: ref(badge)
+    level: int
+    obtained: date
+  }]
+
+  // get the streak of a student on a given day
+  streak: date => int
 }
 
 badge: {
   label: text
   levels: [text]
-  earned: student => int // check whether the given student has earned the badge and at which level
+
+  // check whether the given student has earned the badge on a given day, and return the badge level
+  earned: student, date => int
 }
 ```

@@ -17,12 +17,6 @@ export class Enrollment {
   @Column("datetime")
   enrolled: Date;
 
-  @Column({ default: 0 })
-  goal: number;
-
-  @Column("simple-json")
-  scores: any = {};
-
   @OneToMany(type => Quiz, quiz => quiz.enrollment)
   quizzes: Quiz[];
 }
