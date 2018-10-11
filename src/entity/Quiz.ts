@@ -24,13 +24,13 @@ export class Quiz {
   @Column()
   level: number;
 
-  @Column("datetime")
+  @Column("datetime", { nullable: true })
   started: Date;
 
-  @Column("datetime")
+  @Column("datetime", { nullable: true })
   completed: Date;
 
-  @OneToMany(type => Answer, answer => answer.quiz)
+  @OneToMany(type => Answer, answer => answer.quiz, { cascade: true })
   answers: Answer[];
 
   async score(): Promise<number> {

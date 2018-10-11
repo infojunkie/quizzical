@@ -13,9 +13,7 @@ export class Skill {
   @ManyToMany(type => Skill, skill => skill.prerequisites)
   dependents: Skill[];
 
-  @ManyToMany(type => Skill, skill => skill.dependents, {
-    cascade: true
-  })
+  @ManyToMany(type => Skill, skill => skill.dependents, { cascade: true })
   @JoinTable({
     joinColumn: {
       name: "skillId",

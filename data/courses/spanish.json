@@ -67,6 +67,11 @@
           }
         }
       ]
+    },
+    {
+      "label": "Basics 2",
+      "description": "",
+      "prerequisites": ["Basics 1"]
     }
   ]
 }

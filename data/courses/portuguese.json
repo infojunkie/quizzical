@@ -65,6 +65,36 @@
             "choices": ["Sou a água", "Eu sou a mulher", "Eu sou a maçã"],
             "answer": "Eu sou a mulher"
           }
+        },
+        {
+          "level": 2,
+          "difficulty": 1,
+          "type": "SelectQuestion",
+          "config": {
+            "target": "the woman (level 2)",
+            "choices": ["a mulher", "o menino", "o homem"],
+            "answer": "a mulher"
+          }
+        },
+        {
+          "level": 2,
+          "difficulty": 1,
+          "type": "SelectQuestion",
+          "config": {
+            "target": "the girl (level 2)",
+            "choices": ["a mulher", "a menina", "o menino"],
+            "answer": "a menina"
+          }
+        },
+        {
+          "level": 2,
+          "difficulty": 1,
+          "type": "AssembleQuestion",
+          "config": {
+            "target": "a menina (level 2)",
+            "choices": ["I", "boy", "the", "man", "The", "girl"],
+            "answer": "the girl"
+          }
         }
       ]
     },

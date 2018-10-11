@@ -1,4 +1,30 @@
 {
   "name": "Caio",
-  "goal": 10
+  "goal": 10,
+  "enrollments": [
+    {
+      "course": "Spanish",
+      "enrolled": "2017-06-05 15:34:25",
+      "quizzes": [
+        {
+          "skill": "Basics 1",
+          "level": 1,
+          "answers": [
+            {
+              "question": 0,
+              "answer": "la mujer",
+              "started": "2017-06-05 15:45:36",
+              "completed": "2017-06-05 15:46:45"
+            },
+            {
+              "question": 1,
+              "answer": "la niña",
+              "started": "2017-06-05 15:47:24",
+              "completed": "2017-06-05 15:48:02"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
