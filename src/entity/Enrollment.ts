@@ -13,6 +13,7 @@ import {Skill} from './Skill';
 import {SkillLevel} from './SkillLevel';
 import {Answer} from './Answer';
 import {Question} from './Question';
+import {Helpers} from '../Helpers';
 import {CONFIG} from '../config';
 
 @Entity()
@@ -71,25 +72,6 @@ export class Enrollment {
   }
 
   /**
-   * Utility to shuffle an array.
-   * https://www.frankmitchell.org/2015/01/fisher-yates/
-   */
-  static shuffle<T>(array: Array<T>): Array<T> {
-    var i = 0
-      , j = 0
-      , temp = null
-
-    for (i = array.length - 1; i > 0; i -= 1) {
-      j = Math.floor(Math.random() * (i + 1))
-      temp = array[i]
-      array[i] = array[j]
-      array[j] = temp
-    }
-
-    return array;
-  }
-
-  /**
    * Generate a new quiz for a given skill:
    * 1. Get unanswered questions for the next skill level
    * 2. Complement with answered questions with mistakes if not enough in step 1
@@ -129,13 +111,13 @@ export class Enrollment {
     // Answered questions with mistakes.
     if (selectedQuestions.length < CONFIG.questionsPerQuiz) {
       const unpassed = questions.filter(q => q.answer_passed === 0);
-      selectedQuestions = selectedQuestions.concat(Enrollment.shuffle(unpassed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
+      selectedQuestions = selectedQuestions.concat(Helpers.shuffle(unpassed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
     }
 
     // Random other questions.
     if (selectedQuestions.length < CONFIG.questionsPerQuiz) {
       const passed = questions.filter(q => q.answer_passed === 1);
-      selectedQuestions = selectedQuestions.concat(Enrollment.shuffle(passed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
+      selectedQuestions = selectedQuestions.concat(Helpers.shuffle(passed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
     }
 
     // Trim to questions per quiz.

@@ -6,6 +6,7 @@ import {
   TableInheritance
 } from 'typeorm';
 import {Skill} from './Skill';
+import {Helpers} from '../Helpers';
 
 export class AnswerEvaluation {
   // Automatic constructor arguments
@@ -37,20 +38,8 @@ export class Question {
    */
   evaluate(answer: any): AnswerEvaluation {
     return new AnswerEvaluation(
-      Question.normalize(this.config.answer) === Question.normalize(answer),
+      Helpers.normalize(this.config.answer) === Helpers.normalize(answer),
       this.config.answer
     );
-  }
-
-  /**
-   * Text normalization utility.
-   */
-  protected static normalize(str: string): string {
-    return str
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
-      .replace(/\s+/g, ' ')
-      .toLowerCase();
   }
 }

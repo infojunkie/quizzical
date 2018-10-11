@@ -11,22 +11,15 @@ import {Answer} from "./entity/Answer";
 import {Achievement} from "./entity/Achievement";
 import {DailyScore} from "./entity/DailyScore";
 import {SkillLevel} from "./entity/SkillLevel";
+import {Helpers} from "./Helpers";
 import * as fs from 'fs';
-
-// https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
-async function asyncForEach(array, callback) {
-  if (!array) return;
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array)
-  }
-}
 
 // connection settings are in the "ormconfig.json" file
 createConnection().then(async connection => {
   if (!await connection.manager.findOne(Badge)) {
     // Badges
     const badges = new Array<Badge>();
-    await asyncForEach(JSON.parse(fs.readFileSync('data/badges.json').toString()), async b => {
+    await Helpers.asyncForEach(JSON.parse(fs.readFileSync('data/badges.json').toString()), async b => {
       const badge = connection.getMetadata(b.type).create();
       badge.label = b.label;
       badge.levels = b.levels;
@@ -36,22 +29,22 @@ createConnection().then(async connection => {
     console.log('Populated badges');
 
     // Courses
-    await asyncForEach(fs.readdirSync('data/courses'), async cf => {
+    await Helpers.asyncForEach(fs.readdirSync('data/courses'), async cf => {
       const c = JSON.parse(fs.readFileSync(`data/courses/${cf}`).toString());
       const course = new Course();
       course.label = c.label;
       await connection.manager.save(course);
-      await asyncForEach(c.skills, async s => {
+      await Helpers.asyncForEach(c.skills, async s => {
         const skill = new Skill();
         skill.course = course;
         skill.label = s.label;
         skill.description = s.description;
         skill.prerequisites = [];
-        await asyncForEach(s.prerequisites, async p => {
+        await Helpers.asyncForEach(s.prerequisites, async p => {
           skill.prerequisites.push(await connection.manager.findOne(Skill, { label: p, course }));
         });
         await connection.manager.save(skill);
-        await asyncForEach(s.questions, async q => {
+        await Helpers.asyncForEach(s.questions, async q => {
           const question = connection.getMetadata(q.type).create();
           question.skill = skill;
           question.level = q.level;
@@ -64,24 +57,24 @@ createConnection().then(async connection => {
     console.log('Populated courses');
 
     // Students
-    await asyncForEach(fs.readdirSync('data/students'), async sf => {
+    await Helpers.asyncForEach(fs.readdirSync('data/students'), async sf => {
       const s = JSON.parse(fs.readFileSync(`data/students/${sf}`).toString());
       const student = new Student();
       student.name = s.name;
       student.goal = s.goal;
       student.following = [];
-      await asyncForEach(s.following, async f => {
+      await Helpers.asyncForEach(s.following, async f => {
         student.following.push(await connection.manager.findOne(Student, { name: f }));
       });
       await connection.manager.save(student);
       const dailyScores = new Map<string, DailyScore>();
-      await asyncForEach(s.enrollments, async e => {
+      await Helpers.asyncForEach(s.enrollments, async e => {
         const enrollment = new Enrollment();
         enrollment.student = student;
         enrollment.course = await connection.manager.findOne(Course, { label: e.course });
         enrollment.enrolled = new Date(e.enrolled);
         await connection.manager.save(enrollment);
-        await asyncForEach(e.quizzes, async q => {
+        await Helpers.asyncForEach(e.quizzes, async q => {
           const quiz = new Quiz();
           quiz.enrollment = enrollment;
           quiz.level = q.level;
@@ -90,7 +83,7 @@ createConnection().then(async connection => {
           quiz.completed = new Date(q.answers[q.answers.length-1].completed);
           quiz.answers = [];
           const questions = await connection.manager.find(Question, { skill: quiz.skill, level: quiz.level });
-          await asyncForEach(q.answers, async a => {
+          await Helpers.asyncForEach(q.answers, async a => {
             const answer = new Answer();
             answer.quiz = quiz;
             answer.enrollment = enrollment;
@@ -127,11 +120,11 @@ createConnection().then(async connection => {
       });
 
       // Student scores.
-      await asyncForEach([...dailyScores.values()], async dailyScore => {
+      await Helpers.asyncForEach([...dailyScores.values()], async dailyScore => {
         await connection.manager.save(dailyScore);
 
         // Student badges - check each day.
-        await asyncForEach(badges, async badge => {
+        await Helpers.asyncForEach(badges, async badge => {
           const level = await badge.earned(student, dailyScore.date);
           if (level > 0) {
             const achievement = new Achievement();
