@@ -6,7 +6,8 @@
   "scripts": {
     "start": "tsc && node src/index.js",
     "clean": "rm data/quizzical.db || true",
-    "database": "sqlite3 data/quizzical.db || true"
+    "database": "sqlite3 data/quizzical.db || true",
+    "doc": "typedoc --out ./doc src/**/*.ts"
   },
   "author": "",
   "license": "ISC",
