@@ -116,7 +116,8 @@ export class Enrollment {
 
     // Answered questions with mistakes.
     if (selectedQuestions.length < CONFIG.questionsPerQuiz) {
-      selectedQuestions = selectedQuestions.concat(questions.filter(q => q.answer_passed === 0));
+      const unpassed = questions.filter(q => q.answer_passed === 0);
+      selectedQuestions = selectedQuestions.concat(Enrollment.shuffle(unpassed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
     }
 
     // Random other questions.
@@ -137,6 +138,7 @@ export class Enrollment {
       const answer = new Answer();
       answer.quiz = quiz;
       answer.question = question;
+      answer.enrollment = this;
       return answer;
     });
     return quiz;
