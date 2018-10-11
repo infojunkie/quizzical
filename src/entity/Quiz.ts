@@ -33,8 +33,12 @@ export class Quiz {
   @OneToMany(type => Answer, answer => answer.quiz, { cascade: true })
   answers: Answer[];
 
+  /**
+   * Calculate the score for a quiz based on all its answers.
+   *
+   * TODO add logic to reward first-time correct answers.
+   */
   async score(): Promise<number> {
-    // TODO add logic to reward first-time correct answers.
     return (await getConnection().manager.findAndCount(Answer, { quiz: this }))[1];
   }
 }

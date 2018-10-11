@@ -31,7 +31,10 @@ export class Question {
   @Column("simple-json")
   config: any;
 
-  // Most question types store the correct answer in `config.answer`
+  /**
+   * Overridable function to evaluate an answer.
+   * Most question types store the correct answer as plain text in `config.answer`.
+   */
   evaluate(answer: any): AnswerEvaluation {
     return new AnswerEvaluation(
       Question.normalize(this.config.answer) === Question.normalize(answer),
@@ -39,6 +42,9 @@ export class Question {
     );
   }
 
+  /**
+   * Text normalization utility.
+   */
   protected static normalize(str: string): string {
     return str
       .normalize('NFD')

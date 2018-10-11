@@ -16,5 +16,9 @@ export class Badge {
   @Column("simple-array")
   levels: string[];
 
+  /**
+   * Overridable function to check whether a student has earned a badge.
+   * Each `Badge` subclass implements its own logic.
+   */
   async earned(student: Student, date: Date): Promise<number> { return 0; }
 }

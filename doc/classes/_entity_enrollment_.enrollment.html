@@ -112,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">course<span class="tsd-signature-symbol">:</span> <a href="_entity_course_.course.html" class="tsd-signature-type">Course</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L24">entity/Enrollment.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L24">entity/Enrollment.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,7 +122,7 @@
 					<div class="tsd-signature tsd-kind-icon">enrolled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L33">entity/Enrollment.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L33">entity/Enrollment.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L21">entity/Enrollment.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L21">entity/Enrollment.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">quizzes<span class="tsd-signature-symbol">:</span> <a href="_entity_quiz_.quiz.html" class="tsd-signature-type">Quiz</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L36">entity/Enrollment.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L36">entity/Enrollment.ts:36</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +152,7 @@
 					<div class="tsd-signature tsd-kind-icon">skill<wbr>Levels<span class="tsd-signature-symbol">:</span> <a href="_entity_skilllevel_.skilllevel.html" class="tsd-signature-type">SkillLevel</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L30">entity/Enrollment.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L30">entity/Enrollment.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -162,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">student<span class="tsd-signature-symbol">:</span> <a href="_entity_student_.student.html" class="tsd-signature-type">Student</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L27">entity/Enrollment.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L27">entity/Enrollment.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,9 +179,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L55">entity/Enrollment.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L62">entity/Enrollment.ts:62</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Available skills are those that have no prerequisites
+									or whose prerequisistes have been learned by the student.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_entity_skill_.skill.html" class="tsd-signature-type">Skill</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -196,9 +202,17 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L38">entity/Enrollment.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L45">entity/Enrollment.ts:45</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check the skill level reached by the student
+										based on quiz answers, not on the saved skillLevels.
+									A level is reached when are no more questions of the given skill that are left unanswered.</p>
+								</div>
+								<p>TODO handle when answer.passed = false AND there is no other answer to the same question that passed.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -222,9 +236,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L84">entity/Enrollment.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L100">entity/Enrollment.ts:100</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate a new quiz for a given skill:</p>
+									<ol>
+										<li>Get unanswered questions for the next skill level</li>
+										<li>Complement with answered questions with mistakes if not enough in step 1</li>
+										<li>Complement with random answered questions if not enough in step 2</li>
+									</ol>
+								</div>
+								<p>TODO handle when last level has been reached.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -245,9 +270,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/d51d9b8/src/entity/Enrollment.ts#L69">entity/Enrollment.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/10aaf5c/src/entity/Enrollment.ts#L77">entity/Enrollment.ts:77</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Utility to shuffle an array.
+									<a href="https://www.frankmitchell.org/2015/01/fisher-yates/">https://www.frankmitchell.org/2015/01/fisher-yates/</a></p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>

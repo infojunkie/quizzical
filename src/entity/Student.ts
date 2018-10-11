@@ -50,8 +50,10 @@ export class Student {
   @OneToMany(type => Achievement, achievement => achievement.student)
   achievements: Achievement[];
 
-  // Number of consecutive days of achieving daily goal
-  // http://duolingo.wikia.com/wiki/Streak
+  /**
+   * Number of consecutive days of achieving daily goal.
+   * http://duolingo.wikia.com/wiki/Streak
+   */
   async streak(start: Date): Promise<number> {
     let streak = 0;
     do {

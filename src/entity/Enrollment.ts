@@ -35,10 +35,14 @@ export class Enrollment {
   @OneToMany(type => Quiz, quiz => quiz.enrollment)
   quizzes: Quiz[];
 
+  /**
+   * Check the skill level reached by the student
+   * based on quiz answers, not on the saved skillLevels.
+   * A level is reached when are no more questions of the given skill that are left unanswered.
+   *
+   * TODO handle when answer.passed = false AND there is no other answer to the same question that passed.
+   */
   async missingQuestionsForSkillLevel(skill: Skill, level: number): Promise<number> {
-    // Check the skill level reached by the student
-    // based on quiz answers, not on the saved skillLevels.
-    // A level is reached when are no more questions of the given skill that are left unanswered.
     return await getConnection()
       .getRepository(Question)
       .createQueryBuilder('question')
@@ -48,13 +52,14 @@ export class Enrollment {
       .where('question.skillId = :skillId', { skillId: skill.id })
       .andWhere('question.level = :level', { level })
       .andWhere('answer.id IS NULL')
-      // TODO handle when answer.passed = false AND there is no other answer to the same question that passed.
       .getCount();
   }
 
+  /**
+   * Available skills are those that have no prerequisites
+   * or whose prerequisistes have been learned by the student.
+   */
   async availableSkills(): Promise<Skill[]> {
-    // Available skills are those that have no prerequisites
-    // or whose prerequisistes have been learned by the student.
     return await getConnection()
       .getRepository(Skill)
       .createQueryBuilder('skill')
@@ -65,7 +70,10 @@ export class Enrollment {
       .getMany();
   }
 
-  // https://www.frankmitchell.org/2015/01/fisher-yates/
+  /**
+   * Utility to shuffle an array.
+   * https://www.frankmitchell.org/2015/01/fisher-yates/
+   */
   static shuffle<T>(array: Array<T>): Array<T> {
     var i = 0
       , j = 0
@@ -81,11 +89,15 @@ export class Enrollment {
     return array;
   }
 
+  /**
+   * Generate a new quiz for a given skill:
+   * 1. Get unanswered questions for the next skill level
+   * 2. Complement with answered questions with mistakes if not enough in step 1
+   * 3. Complement with random answered questions if not enough in step 2
+   *
+   * TODO handle when last level has been reached.
+   */
   async quiz(skill: Skill): Promise<Quiz> {
-    // To generate a new quiz for a given skill:
-    // 1. Get unanswered questions for the next skill level
-    // 2. Complement with answered questions with mistakes if not enough in step 1
-    // 3. Complement with random answered questions if not enough in step 2
 
     // These are ALL the questions for the given skill, for the level about the latest one obtained.
     // We will sort through them later.
