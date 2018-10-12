@@ -35,8 +35,8 @@ sqlite> .header on
 sqlite> select * from daily_score;
 id|date|score|goal|studentId
 1|2017-06-05|2|10|1
-2|2018-10-04|4|3|2
-3|2016-01-05|4|3|2
+2|2018-10-04|3|3|2
+3|2016-01-05|3|3|2
 4|2016-01-06|3|3|2
 sqlite> ^D
 
