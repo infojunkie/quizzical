@@ -34,11 +34,14 @@ export class Quiz {
   answers: Answer[];
 
   /**
-   * Calculate the score for a quiz based on all its answers.
-   *
-   * TODO add logic to reward first-time correct answers.
+   * Calculate the score for a quiz based on all its correct answers.
    */
   async score(): Promise<number> {
-    return (await getConnection().manager.findAndCount(Answer, { quiz: this }))[1];
+    return await getConnection()
+      .getRepository(Answer)
+      .createQueryBuilder('answer')
+      .where('answer.passed = 1')
+      .andWhere('answer.quizId = :quizId', { quizId: this.id })
+      .getCount();
   }
 }

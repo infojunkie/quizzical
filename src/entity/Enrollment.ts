@@ -39,16 +39,14 @@ export class Enrollment {
   /**
    * Check the skill level reached by the student
    * based on quiz answers, not on the saved skillLevels.
-   * A level is reached when are no more questions of the given skill that are left unanswered.
-   *
-   * TODO handle when answer.passed = false AND there is no other answer to the same question that passed.
+   * A level is reached when there are no more questions of the given skill left unanswered.
    */
   async missingQuestionsForSkillLevel(skill: Skill, level: number): Promise<number> {
     return await getConnection()
       .getRepository(Question)
       .createQueryBuilder('question')
       .leftJoinAndSelect(Answer, 'answer',
-        'answer.questionId = question.id AND answer.enrollmentId = :enrollmentId', { enrollmentId: this.id }
+        'answer.questionId = question.id AND answer.passed = 1 AND answer.enrollmentId = :enrollmentId', { enrollmentId: this.id }
       )
       .where('question.skillId = :skillId', { skillId: skill.id })
       .andWhere('question.level = :level', { level })
@@ -74,13 +72,15 @@ export class Enrollment {
   /**
    * Generate a new quiz for a given skill:
    * 1. Get unanswered questions for the next skill level
-   * 2. Complement with answered questions with mistakes if not enough in step 1
-   * 3. Complement with random answered questions if not enough in step 2
+   * 2. Complement with random answered questions with mistakes if not enough in step 1
+   * 3. Complement with random answered questions without mistakes if not enough in step 2
    *
-   * TODO handle when last level has been reached.
+   * IMPORTANT: The returned quiz is NOT saved to the database. It is assumed that the caller
+   * will keep it in memory until all questions are answered by the student, then it can be saved
+   * along with the filled answers. The `Quiz.started` and `completed` attributes are returned
+   * empty, as are each `Answer.answer`, `started`, `completed`, `passed`, and `correct`.
    */
   async quiz(skill: Skill): Promise<Quiz> {
-
     // These are ALL the questions for the given skill, for the level about the latest one obtained.
     // We will sort through them later.
     const questions = await getConnection()
