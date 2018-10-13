@@ -46,7 +46,7 @@ export class Enrollment {
       .getRepository(Question)
       .createQueryBuilder('question')
       .leftJoinAndSelect(Answer, 'answer',
-        'answer.questionId = question.id AND answer.passed = 1 AND answer.enrollmentId = :enrollmentId', { enrollmentId: this.id }
+        'answer.questionId = question.id AND answer.correct = 1 AND answer.enrollmentId = :enrollmentId', { enrollmentId: this.id }
       )
       .where('question.skillId = :skillId', { skillId: skill.id })
       .andWhere('question.level = :level', { level })
@@ -77,8 +77,7 @@ export class Enrollment {
    *
    * IMPORTANT: The returned quiz is NOT saved to the database. It is assumed that the caller
    * will keep it in memory until all questions are answered by the student, then it can be saved
-   * along with the filled answers. The `Quiz.started` and `completed` attributes are returned
-   * empty, as are each `Answer.answer`, `started`, `completed`, `passed`, and `correct`.
+   * along with the filled answers.
    */
   async quiz(skill: Skill): Promise<Quiz> {
     // These are ALL the questions for the given skill, for the level about the latest one obtained.
@@ -110,14 +109,14 @@ export class Enrollment {
 
     // Answered questions with mistakes.
     if (selectedQuestions.length < CONFIG.questionsPerQuiz) {
-      const unpassed = questions.filter(q => q.answer_passed === 0);
-      selectedQuestions = selectedQuestions.concat(Helpers.shuffle(unpassed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
+      const incorrect = questions.filter(q => q.answer_correct === 0);
+      selectedQuestions = selectedQuestions.concat(Helpers.shuffle(incorrect).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
     }
 
     // Random other questions.
     if (selectedQuestions.length < CONFIG.questionsPerQuiz) {
-      const passed = questions.filter(q => q.answer_passed === 1);
-      selectedQuestions = selectedQuestions.concat(Helpers.shuffle(passed).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
+      const correct = questions.filter(q => q.answer_correct === 1);
+      selectedQuestions = selectedQuestions.concat(Helpers.shuffle(correct).slice(0, CONFIG.questionsPerQuiz-selectedQuestions.length));
     }
 
     // Trim to questions per quiz.

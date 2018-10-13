@@ -187,8 +187,8 @@
 <text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-215.3'>answer</text>
 <text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-200.3'>started</text>
 <text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-185.3'>completed</text>
-<text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-170.3'>passed</text>
-<text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-155.3'>correct</text>
+<text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-170.3'>correct</text>
+<text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-155.3'>best</text>
 <polyline fill='none' filter='url(#shadow)' points='1223,-151.5 1311,-151.5 ' stroke='black' style='fill: black; stroke: none; fill-opacity:0.2'/><polyline fill='none' points='1223,-151.5 1311,-151.5 ' stroke='black' style='fill:url(#none);stroke:black;'/>
 <text style='font-size:10px; font-family:Verdana;' text-anchor='middle' transform='translate(0,-2)' x='1267' y='-140.3'> </text>
 </g><g class='node' id='node18'><title>yuml_achievement</title>

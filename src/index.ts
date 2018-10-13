@@ -93,7 +93,7 @@ createConnection().then(async connection => {
             answer.answer = a.answer;
             // Object destructuring ftw
             // https://www.reddit.com/r/javascript/comments/8m1kkk/is_object_destructuring_into_properties_of/dzk1uf7/
-            ({passed: answer.passed, correct: answer.correct} = answer.question.evaluate(answer.answer));
+            ({best: answer.best, correct: answer.correct} = answer.question.evaluate(answer.answer));
             quiz.answers.push(answer);
           });
           await connection.manager.save(quiz);

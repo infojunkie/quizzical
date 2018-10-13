@@ -69,6 +69,17 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An answer contains both the question asked to a student,
+							and the student&#39;s answer. Because these two pieces of data are created at different times,
+							the answer object must be held in memory by the client until the student&#39;s answer has been gathered.
+							An answer cannot be saved to database until all attributes are filled. Specifically, the
+						<code>Answer.started</code>, <code>completed</code>, <code>correct</code>, and <code>best</code> attributes.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -85,11 +96,11 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#answer" class="tsd-kind-icon">answer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#best" class="tsd-kind-icon">best</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#completed" class="tsd-kind-icon">completed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#correct" class="tsd-kind-icon">correct</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#enrollment" class="tsd-kind-icon">enrollment</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#passed" class="tsd-kind-icon">passed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#question" class="tsd-kind-icon">question</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#quiz" class="tsd-kind-icon">quiz</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_entity_answer_.answer.html#started" class="tsd-kind-icon">started</a></li>
@@ -106,9 +117,29 @@
 					<div class="tsd-signature tsd-kind-icon">answer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L21">entity/Answer.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L31">entity/Answer.ts:31</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Student answer</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="best" class="tsd-anchor"></a>
+					<h3>best</h3>
+					<div class="tsd-signature tsd-kind-icon">best<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L46">entity/Answer.ts:46</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Best answer as reported by <code>Question.evaluate()</code></p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="completed" class="tsd-anchor"></a>
@@ -116,17 +147,17 @@
 					<div class="tsd-signature tsd-kind-icon">completed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L27">entity/Answer.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L37">entity/Answer.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="correct" class="tsd-anchor"></a>
 					<h3>correct</h3>
-					<div class="tsd-signature tsd-kind-icon">correct<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+					<div class="tsd-signature tsd-kind-icon">correct<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L33">entity/Answer.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L40">entity/Answer.ts:40</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -136,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">enrollment<span class="tsd-signature-symbol">:</span> <a href="_entity_enrollment_.enrollment.html" class="tsd-signature-type">Enrollment</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L15">entity/Answer.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L22">entity/Answer.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -146,17 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L9">entity/Answer.ts:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="passed" class="tsd-anchor"></a>
-					<h3>passed</h3>
-					<div class="tsd-signature tsd-kind-icon">passed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L30">entity/Answer.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L16">entity/Answer.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">question<span class="tsd-signature-symbol">:</span> <a href="_entity_question_.question.html" class="tsd-signature-type">Question</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L18">entity/Answer.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L25">entity/Answer.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,7 +197,7 @@
 					<div class="tsd-signature tsd-kind-icon">quiz<span class="tsd-signature-symbol">:</span> <a href="_entity_quiz_.quiz.html" class="tsd-signature-type">Quiz</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L12">entity/Answer.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L19">entity/Answer.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">started<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/4313526/src/entity/Answer.ts#L24">entity/Answer.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/infojunkie/quizzical/blob/6bd3e11/src/entity/Answer.ts#L34">entity/Answer.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -262,6 +283,9 @@
 								<a href="_entity_answer_.answer.html#answer" class="tsd-kind-icon">answer</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_entity_answer_.answer.html#best" class="tsd-kind-icon">best</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_entity_answer_.answer.html#completed" class="tsd-kind-icon">completed</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -272,9 +296,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_entity_answer_.answer.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_entity_answer_.answer.html#passed" class="tsd-kind-icon">passed</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_entity_answer_.answer.html#question" class="tsd-kind-icon">question</a>

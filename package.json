@@ -7,7 +7,7 @@
     "start": "tsc && node src/index.js",
     "clean": "rm data/quizzical.db || true",
     "database": "sqlite3 data/quizzical.db || true",
-    "doc": "typedoc --out ./doc src/**/*.ts"
+    "doc": "typedoc --out ./doc src/**/*.ts && tsuml --glob './src/**/*.ts'"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.11.4",
+    "tsuml": "0.0.1-alpha.8",
     "typedoc": "^0.13.0",
     "typescript": "^3.1.1"
   }

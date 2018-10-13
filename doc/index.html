@@ -95,8 +95,8 @@ sqlite&gt; .header on
 sqlite&gt; select * from daily_score;
 id|<span class="hljs-type">date</span>|<span class="hljs-type">score</span>|<span class="hljs-type">goal</span>|<span class="hljs-type">studentId</span>
 <span class="hljs-number">1</span>|<span class="hljs-type">2017</span><span class="hljs-number">-06</span><span class="hljs-number">-05</span>|<span class="hljs-type">2</span>|<span class="hljs-type">10</span>|<span class="hljs-type">1</span>
-<span class="hljs-number">2</span>|<span class="hljs-type">2018</span><span class="hljs-number">-10</span><span class="hljs-number">-04</span>|<span class="hljs-type">4</span>|<span class="hljs-type">3</span>|<span class="hljs-type">2</span>
-<span class="hljs-number">3</span>|<span class="hljs-type">2016</span><span class="hljs-number">-01</span><span class="hljs-number">-05</span>|<span class="hljs-type">4</span>|<span class="hljs-type">3</span>|<span class="hljs-type">2</span>
+<span class="hljs-number">2</span>|<span class="hljs-type">2018</span><span class="hljs-number">-10</span><span class="hljs-number">-04</span>|<span class="hljs-type">3</span>|<span class="hljs-type">3</span>|<span class="hljs-type">2</span>
+<span class="hljs-number">3</span>|<span class="hljs-type">2016</span><span class="hljs-number">-01</span><span class="hljs-number">-05</span>|<span class="hljs-type">3</span>|<span class="hljs-type">3</span>|<span class="hljs-type">2</span>
 <span class="hljs-number">4</span>|<span class="hljs-type">2016</span><span class="hljs-number">-01</span><span class="hljs-number">-06</span>|<span class="hljs-type">3</span>|<span class="hljs-type">3</span>|<span class="hljs-type">2</span>
 sqlite&gt; ^D
 
@@ -135,7 +135,7 @@ $ npm run clean
 <span class="hljs-symbol">      config:</span> json <span class="hljs-comment">// question structure depends on its type</span>
 
       <span class="hljs-comment">// given an answer, evaluate if it passes or fails and return closest correct answer</span>
-<span class="hljs-symbol">      evaluate:</span> (answer: json) =&gt; { passed: boolean, correct: json }
+<span class="hljs-symbol">      evaluate:</span> (answer: json) =&gt; { correct: boolean, best: json }
     }]
   }]
 }
@@ -157,8 +157,8 @@ student:</span> {
 <span class="hljs-symbol">        answer:</span> json <span class="hljs-comment">// answer structure depends on the type of question</span>
 <span class="hljs-symbol">        started:</span> datetime <span class="hljs-comment">// time at which the question was started by the student</span>
 <span class="hljs-symbol">        completed:</span> datetime <span class="hljs-comment">// time at whice the answer was submitted by the student</span>
-<span class="hljs-symbol">        passed:</span> boolean
-<span class="hljs-symbol">        correct:</span> json
+<span class="hljs-symbol">        correct:</span> boolean
+<span class="hljs-symbol">        best:</span> json <span class="hljs-comment">// best answer as reported by question.evaluate()</span>
       }]
 <span class="hljs-symbol">
       score:</span> () =&gt; int

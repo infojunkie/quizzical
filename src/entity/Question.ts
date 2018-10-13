@@ -11,7 +11,7 @@ import {Helpers} from '../Helpers';
 export class AnswerEvaluation {
   // Automatic constructor arguments
   // https://www.stevefenton.co.uk/2013/04/Stop-Manually-Assigning-TypeScript-Constructor-Parameters/
-  constructor(public passed: boolean, public correct: any) {}
+  constructor(public correct: boolean, public best: any) {}
 }
 
 @Entity()

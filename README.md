@@ -80,7 +80,7 @@ course: {
       config: json // question structure depends on its type
 
       // given an answer, evaluate if it passes or fails and return closest correct answer
-      evaluate: (answer: json) => { passed: boolean, correct: json }
+      evaluate: (answer: json) => { correct: boolean, best: json }
     }]
   }]
 }
@@ -102,8 +102,8 @@ student: {
         answer: json // answer structure depends on the type of question
         started: datetime // time at which the question was started by the student
         completed: datetime // time at whice the answer was submitted by the student
-        passed: boolean
-        correct: json
+        correct: boolean
+        best: json // best answer as reported by question.evaluate()
       }]
 
       score: () => int
