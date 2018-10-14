@@ -7,7 +7,7 @@
     "start": "tsc && node src/index.js",
     "clean": "rm data/quizzical.db || true",
     "database": "sqlite3 data/quizzical.db || true",
-    "doc": "typedoc --out ./doc src/**/*.ts && tsuml --glob './src/**/*.ts'",
+    "doc": "typedoc --out ./doc src/**/*.ts && tsviz -r src/ doc/classes.png",
     "test": "tsc && rm test/quizzical.test.db || true && mocha --timeout 15000 -r ts-node/register ./test/**/*.spec.ts"
   },
   "author": "",
@@ -25,7 +25,7 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
-    "tsuml": "0.0.1-alpha.8",
+    "tsviz": "^1.0.11",
     "typedoc": "^0.13.0",
     "typescript": "^3.1.3"
   }

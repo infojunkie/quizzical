@@ -132,3 +132,13 @@ badge: {
   earned: student, date => int
 }
 ```
+
+# Documentation
+
+```
+$ apt-get install graphviz
+$ sudo ln -s /usr/bin/dot /usr/local/bin
+$ npm run doc
+$ firefox doc/index.html
+$ eog doc/classes.png
+```
