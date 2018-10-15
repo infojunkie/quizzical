@@ -1,21 +1,33 @@
-import {createConnection} from "typeorm";
+import 'reflect-metadata';
+import * as TypeORM from 'typeorm';
 import {DateUtils} from 'typeorm/util/DateUtils';
-import {Course} from "./entity/Course";
-import {Skill} from "./entity/Skill";
-import {Question} from "./entity/Question";
-import {Badge} from "./entity/Badge";
-import {Student} from "./entity/Student";
-import {Enrollment} from "./entity/Enrollment";
-import {Quiz} from "./entity/Quiz";
-import {Answer} from "./entity/Answer";
-import {Achievement} from "./entity/Achievement";
-import {DailyScore} from "./entity/DailyScore";
-import {SkillLevel} from "./entity/SkillLevel";
-import {Helpers} from "./Helpers";
+import {GraphQLServer, Options} from 'graphql-yoga';
+import * as TypeGraphQL from 'type-graphql';
+import {Container} from 'typedi';
+import {Course} from './entity/Course';
+import {Skill} from './entity/Skill';
+import {Question} from './entity/Question';
+import {Badge} from './entity/Badge';
+import {Student} from './entity/Student';
+import {Enrollment} from './entity/Enrollment';
+import {Quiz} from './entity/Quiz';
+import {Answer} from './entity/Answer';
+import {Achievement} from './entity/Achievement';
+import {DailyScore} from './entity/DailyScore';
+import {SkillLevel} from './entity/SkillLevel';
+import {Helpers} from './Helpers';
+import {CourseResolver} from './resolver/Course';
 import * as fs from 'fs';
 
-// connection settings are in the "ormconfig.json" file
-createConnection().then(async connection => {
+TypeGraphQL.useContainer(Container);
+TypeORM.useContainer(Container);
+
+export interface Context {
+  user: Student;
+}
+
+// connection settings are in the 'ormconfig.json' file
+TypeORM.createConnection().then(async connection => {
   if (!await connection.manager.findOne(Badge)) {
     // Badges
     const badges = new Array<Badge>();
@@ -172,5 +184,25 @@ createConnection().then(async connection => {
     console.log(`Next Portuguese quiz for Karim: `, quiz);
   })();
 
-  process.exit(0);
-}).catch(error => console.error("Error: ", error));
+  // Start GraphQL server.
+  const schema = await TypeGraphQL.buildSchema({
+    resolvers: [CourseResolver],
+  });
+
+  const context: Context = { user: null };
+
+  const server = new GraphQLServer({ schema, context });
+
+  const serverOptions: Options = {
+    port: 4000,
+    endpoint: '/graphql',
+    playground: '/playground',
+  };
+
+  // Start the server
+  server.start(serverOptions, ({ port, playground }) => {
+    console.log(
+      `Server is running, GraphQL Playground available at http://localhost:${port}${playground}`,
+    );
+  });
+}).catch(error => console.error('Error: ', error));

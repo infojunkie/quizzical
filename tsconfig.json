@@ -1,8 +1,8 @@
 {
   "version": "2.4.2",
   "compilerOptions": {
-    "lib": ["es5", "es6"],
-    "target": "es6",
+    "lib": ["es5", "es6", "es2016", "esnext.asynciterable"],
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
