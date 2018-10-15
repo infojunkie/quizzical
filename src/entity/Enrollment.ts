@@ -80,7 +80,7 @@ export class Enrollment {
    * along with the filled answers.
    */
   async quiz(skill: Skill): Promise<Quiz> {
-    // These are ALL the questions for the given skill, for the level about the latest one obtained.
+    // These are ALL the questions for the given skill, for the level above the latest one obtained.
     // We will sort through them later.
     const questions = await getConnection()
       .getRepository(Question)
