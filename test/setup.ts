@@ -28,18 +28,18 @@ export async function loadTestData(): Promise<Connection> {
     "synchronize": true,
     "logging": false,
     "entities": [
-      "src/entity/*.js"
+      "build/src/entity/*.js"
     ],
     "subscribers": [
-      "src/subscriber/*.js"
+      "build/src/subscriber/*.js"
     ],
     "migrations": [
-      "src/migration/*.js"
+      "build/src/migration/*.js"
     ],
     "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
+      "entitiesDir": "build/src/entity",
+      "migrationsDir": "build/src/migration",
+      "subscribersDir": "build/src/subscriber"
     }
   });
 

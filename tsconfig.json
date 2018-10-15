@@ -1,13 +1,14 @@
 {
   "version": "2.4.2",
   "compilerOptions": {
-    "lib": ["es5", "es6"],
-    "target": "es6",
+    "lib": ["es2016", "esnext.asynciterable"],
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "outDir": "./build"
   },
   "exclude": [
     "node_modules"
