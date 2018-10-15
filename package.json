@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node src/index.js",
+    "start": "tsc && node build/src/index.js",
     "clean": "rm data/quizzical.db || true",
     "database": "sqlite3 data/quizzical.db || true",
     "doc": "typedoc --out ./doc src/**/*.ts && tsviz -r src/ doc/classes.png",
-    "test": "tsc && rm test/quizzical.test.db || true && mocha --timeout 15000 -r ts-node/register ./test/**/*.spec.ts"
+    "test": "tsc && rm test/quizzical.test.db || true && mocha --timeout 20000 ./build/test/**/*.spec.js"
   },
-  "author": "",
+  "author": "Karim Ratib",
   "license": "ISC",
   "dependencies": {
     "graphql-yoga": "^1.16.2",
