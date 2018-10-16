@@ -2,12 +2,12 @@ import {loadTestData} from './setup';
 import {expect} from 'chai';
 import {Enrollment} from '../src/entity/Enrollment';
 
-describe('Quizzical', () => {
+describe('quizzical', () => {
   let connection = null;
 
   before(async () => connection = await loadTestData());
 
-  it('Generate new quiz', async () => {
+  it('generates new quiz', async () => {
     // Generate new quiz for Caio.
     await (async () => {
       const enrollment = await connection
