@@ -1,6 +1,10 @@
-import {createConnection} from "typeorm";
+import 'reflect-metadata';
+import * as TypeORM from 'typeorm';
+import * as TypeGraphQL from 'type-graphql';
 import {DateUtils} from 'typeorm/util/DateUtils';
+import {Container} from 'typedi';
 import {Course} from "./entity/Course";
+import {CourseResolver} from './resolver/Course';
 import {Skill} from "./entity/Skill";
 import {Question} from "./entity/Question";
 import {Badge} from "./entity/Badge";
@@ -12,10 +16,15 @@ import {Achievement} from "./entity/Achievement";
 import {DailyScore} from "./entity/DailyScore";
 import {SkillLevel} from "./entity/SkillLevel";
 import {Helpers} from "./Helpers";
+import { ApolloServer } from "apollo-server";
 import * as fs from 'fs';
 
+const PORT = process.env.PORT || 4000;
+
+TypeORM.useContainer(Container);
+
 // connection settings are in the "ormconfig.json" file
-createConnection().then(async connection => {
+TypeORM.createConnection().then(async connection => {
   if (!await connection.manager.findOne(Badge)) {
     // Badges
     const badges = new Array<Badge>();
@@ -172,5 +181,19 @@ createConnection().then(async connection => {
     console.log(`Next Portuguese quiz for Karim: `, quiz);
   })();
 
-  process.exit(0);
+  // Start GraphQL server.
+  const schema = await TypeGraphQL.buildSchema({
+    resolvers: [CourseResolver],
+  });
+
+  // Create the GraphQL server
+  const server = new ApolloServer({
+    schema,
+    playground: true,
+  });
+
+  // Start the server
+  const { url } = await server.listen(PORT);
+  console.log(`Server is running, GraphQL Playground available at ${url}`);
+
 }).catch(error => console.error("Error: ", error));

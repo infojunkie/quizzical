@@ -115,8 +115,6 @@ export async function loadTestData(): Promise<Connection> {
           answer.started = new Date(a.started);
           answer.completed = new Date(a.completed);
           answer.answer = a.answer;
-          // Object destructuring ftw
-          // https://www.reddit.com/r/javascript/comments/8m1kkk/is_object_destructuring_into_properties_of/dzk1uf7/
           ({best: answer.best, correct: answer.correct} = answer.question.evaluate(answer.answer));
           quiz.answers.push(answer);
         });
